@@ -17,4 +17,9 @@ class NexeverCheckPlugin {
     final bool isRooted = await _channel.invokeMethod('isDeviceRooted');
     return isRooted;
   }
+
+  static Future<bool> get isDebuggerConnected async {
+    final bool result = await _channel.invokeMethod('isDebuggerConnected');
+    return result;
+  }
 }

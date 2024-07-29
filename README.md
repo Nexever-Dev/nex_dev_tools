@@ -30,5 +30,5 @@ Add the plugin to your `pubspec.yaml` file:
 dependencies:
   flutter:
     sdk: flutter
-  nexever_check_plugin: ^0.0.5
+  nexever_check_plugin: ^0.0.6
 

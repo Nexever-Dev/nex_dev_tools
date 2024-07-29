@@ -19,6 +19,7 @@ class _MyAppState extends State<MyApp> {
   bool isUsbDebugging = false;
   bool isVpnConnected = false;
   bool isDeviceRooted = false;
+  bool isDebugger = false;
 
   @override
   void initState() {
@@ -43,9 +44,15 @@ class _MyAppState extends State<MyApp> {
       } catch (e, s) {
         printLog(e.toString() + s.toString());
       }
+      try {
+        isDebugger = await NexeverCheckPlugin.isDebuggerConnected;
+      } catch (e, s) {
+        printLog(e.toString() + s.toString());
+      }
       printLog('USB Debugging Enabled: $isUsbDebugging');
       printLog('VPN Connected: $isVpnConnected');
       printLog('Device Rooted: $isDeviceRooted');
+      printLog('isDebuggerConnected: $isDebugger');
     } catch (e, s) {
       printLog('$e $s');
     }
@@ -85,6 +92,10 @@ class _MyAppState extends State<MyApp> {
               Padding(
                 padding: const EdgeInsets.all(8.0),
                 child: Text('isDeviceRooted: $isDeviceRooted\n'),
+              ),
+              Padding(
+                padding: const EdgeInsets.all(8.0),
+                child: Text('isDebuggerConnected: $isDebugger\n'),
               ),
             ],
           ),

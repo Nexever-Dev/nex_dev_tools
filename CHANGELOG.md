@@ -17,3 +17,7 @@
 ## 0.0.5
 
 * TODO: Update code.
+
+## 0.0.6
+
+* TODO: Update code.

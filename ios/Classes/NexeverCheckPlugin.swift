@@ -18,15 +18,15 @@ public class NexeverCheckPlugin: NSObject, FlutterPlugin {
             result(isVpnActive())
         case "isDeviceRooted":
             result(isDeviceRooted())
+        case "isDebuggerConnected":
+            result(isDebuggerConnected())
         default:
             result(FlutterMethodNotImplemented)
         }
     }
 
     private func isUsbDebuggingEnabled() -> Bool {
-        // iOS does not provide a direct way to check for USB debugging.
-        // Implement necessary iOS-specific functionality or return false.
-        return false
+        return DeveloperModeChecker.isDeveloperModeEnabled
     }
 
     private func isVpnConnected() -> Bool {
@@ -44,7 +44,8 @@ public class NexeverCheckPlugin: NSObject, FlutterPlugin {
 
         return isConnected
     }
-private func isVpnActive() -> Bool {
+
+    private func isVpnActive() -> Bool {
         let vpnProtocolsKeysIdentifiers = [
             "tap", "tun", "ppp", "ipsec", "utun", "pptp",
         ]
@@ -63,6 +64,7 @@ private func isVpnActive() -> Bool {
         }
         return false
     }
+
     private func isDeviceRooted() -> Bool {
         let fileManager = FileManager.default
         let pathsToCheck = [
@@ -98,4 +100,25 @@ private func isVpnActive() -> Bool {
             return false
         }
     }
+
+   private func isDebuggerConnected() -> Bool {
+       var info = kinfo_proc()
+       var size = MemoryLayout<kinfo_proc>.size
+       let mib: [Int32] = [CTL_KERN, KERN_PROC, KERN_PROC_PID, Int32(getpid())]
+
+       // Convert the array to UnsafeMutablePointer<Int32>
+       let result = mib.withUnsafeBufferPointer { mibPointer in
+           // Convert to UnsafeMutablePointer<Int32>
+           sysctl(UnsafeMutablePointer(mutating: mibPointer.baseAddress!), UInt32(mibPointer.count), &info, &size, nil, 0)
+       }
+
+       // Check if sysctl call was successful
+       if result == 0 {
+           // Check if the process is being traced (debugged)
+           return (info.kp_proc.p_flag & P_TRACED) != 0
+       }
+
+       // Return false if sysctl call failed
+       return false
+   }
 }

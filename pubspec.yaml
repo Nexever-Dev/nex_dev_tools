@@ -1,6 +1,6 @@
 name: nexever_check_plugin
 description: "To implement platform-specific functionality like checking USB debugging, VPN status, and device rooting in a Flutter plugin, you need to create a custom Flutter plugin. This involves defining methods in Dart, implementing platform-specific code in Android (Kotlin/Java) and iOS (Swift/Objective-C), and then linking these implementations via a method channel.."
-version: 0.0.5
+version: 0.0.6
 homepage: https://github.com/Nexever-Dev/nexever_check_plugin.git
 repository: https://github.com/Nexever-Dev/nexever_check_plugin.git
 
