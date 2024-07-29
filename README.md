@@ -1,4 +1,3 @@
-# nexever_check_plugin
 ![nexever logo](https://nexever.com/images/logo2.png)
 
 # nexever_check_plugin
@@ -21,14 +20,15 @@ To use this plugin in your Flutter application, follow these steps:
 
 Add the plugin to your `pubspec.yaml` file:
 
-# add this permission in [AndroidManifest.xml]
-# <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE"/>
+- add this permission in `AndroidManifest.xml`
+
+````xml
+<uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+````
 
 ```yaml
 dependencies:
   flutter:
     sdk: flutter
-  nexever_check_plugin:
-    git:
-      url: https://github.com/sukhchainNexever/nexever_check_plugin.git
+  nexever_check_plugin: ^0.0.5
 
