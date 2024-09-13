@@ -56,7 +56,6 @@ class NexeverCheckPlugin : FlutterPlugin, MethodChannel.MethodCallHandler {
     }
 
     private fun isDebuggerConnected(): Boolean {
-        return false;
         val isConnected = Debug.isDebuggerConnected()
         val isWaiting = Debug.waitingForDebugger()
         val isRunning = isRunningOnEmulator()
@@ -79,7 +78,6 @@ class NexeverCheckPlugin : FlutterPlugin, MethodChannel.MethodCallHandler {
     }
 
     private fun isUsbDebuggingEnabled(): Boolean {
-         return false;
         return Settings.Global.getInt(context.contentResolver, Settings.Global.ADB_ENABLED, 0) == 1
     }
 
